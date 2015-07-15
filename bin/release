@@ -8,3 +8,5 @@ default_process_types:
     web: launcher.sh 
 EOF
 
+echo "Path is $PATH"
+
