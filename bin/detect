@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
+# Any awk web app must have app.awk file
 if [ -f $1/app.awk ]; then
   echo "gawk"
   exit 0

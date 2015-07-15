@@ -2,13 +2,14 @@ set -e
 
 build_dir=$1
 cache_dir=$2
+
 awk_cache=$cache_dir/gawk-4.1.3
-awk_build=$build_dir/vendor/awk
 awk_url="http://ftp.gnu.org/gnu/gawk/gawk-4.1.3.tar.gz"
 
 if [ -f $awk_cache/gawk ]; then
     echo "Using cached gawk"
 else
+    # download and compile gawk
     mkdir -p $awk_cache
     curl -o $cache_dir/gawk.tar.gz "$awk_url"
     cd $cache_dir
@@ -18,15 +19,16 @@ else
     make
 fi
 
-mkdir -p $awk_build
+# copy gawk to build dir
 cp $awk_cache/gawk $build_dir 
 
-PATH=$awk_build:$build_dir:$PATH
-
+# set path and test gawk
+PATH=$build_dir:$PATH
 gawk -V
 
-echo "#!/usr/bin/env bash\n" > $build_dir/launcher.sh
-echo "/app/gawk -v PORT=\"\$PORT\" -v HOST=\"\$VCAP_APP_HOST\" -f \$1" >> $build_dir/launcher.sh
-chmod +x $build_dir/launcher.sh
+# create a launcher to wrap env vars passing
+echo "#!/usr/bin/env bash\n" > $build_dir/awk-start
+echo "/app/gawk -v PORT=\"\$PORT\" -v HOST=\"\$VCAP_APP_HOST\" -f \$1" >> $build_dir/awk-start
+chmod +x $build_dir/awk-start
 
 
