@@ -23,4 +23,4 @@ cp gawk $awk_build/
 
 PATH=$awk_build:$PATH
 
-
+gawk -V
