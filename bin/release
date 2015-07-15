@@ -3,7 +3,7 @@
 
 cat <<EOF
 config_vars:
-    PATH: $1/vendor/awk:$PATH
+    PATH: $1:$1/vendor/awk:$PATH
 default_process_types:
     web: launcher.sh 
 EOF
