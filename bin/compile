@@ -19,8 +19,8 @@ else
 fi
 
 mkdir -p $awk_build
-cp gawk $awk_build/
+cp gawk $build_dir 
 
-PATH=$awk_build:$PATH
+PATH=$awk_build:$build_dir:$PATH
 
 gawk -V
