@@ -31,3 +31,5 @@ echo "gawk -v PORT=\"\$PORT\" -v HOST=\"\$VCAP_APP_HOST\" -f app.awk" >> $build_
 chmod +x $build_dir/launcher.sh
 
 cat $build_dir/launcher.sh
+
+echo "Build $1 cache $2 port $port host $VCAP_APP_HOST"
