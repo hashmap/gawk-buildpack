@@ -10,7 +10,7 @@ if [ - $awk_cache/gawk ]; then
     echo "Using cached gawk"
 else
     mkdir -p $awk_cache
-    #curl -o $cache_dir/gawk.tar.gz "$awk_url"
+    curl -o $cache_dir/gawk.tar.gz "$awk_url"
     cd $cache_dir
     tar zxvf  gawk.tar.gz 
     cd $awk_cache
