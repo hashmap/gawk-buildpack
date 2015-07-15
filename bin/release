@@ -5,6 +5,6 @@ cat <<EOF
 config_vars:
     PATH: /app:$PATH
 default_process_types:
-    web: launcher.sh 
+    web: /app/launcher.sh app.awk
 EOF
 

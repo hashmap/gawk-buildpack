@@ -26,7 +26,7 @@ PATH=$awk_build:$build_dir:$PATH
 gawk -V
 
 echo "#!/usr/bin/env bash\n" > $build_dir/launcher.sh
-echo "gawk -v PORT=\"\$PORT\" -v HOST=\"\$VCAP_APP_HOST\" -f app.awk" >> $build_dir/launcher.sh
+echo "/app/gawk -v PORT=\"\$PORT\" -v HOST=\"\$VCAP_APP_HOST\" -f \$1" >> $build_dir/launcher.sh
 chmod +x $build_dir/launcher.sh
 
 
