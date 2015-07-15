@@ -1,0 +1,26 @@
+set -e
+
+build_dir=$1
+cache_dir=$2
+awk_cache=$cache_dir/gawk-4.1.3
+awk_build=$build_dir/vendor/awk
+awk_url="http://ftp.gnu.org/gnu/gawk/gawk-4.1.3.tar.gz"
+
+if [ - $awk_cache/gawk ]; then
+    echo "Using cached gawk"
+else
+    mkdir -p $awk_cache
+    #curl -o $cache_dir/gawk.tar.gz "$awk_url"
+    cd $cache_dir
+    tar zxvf  gawk.tar.gz 
+    cd $awk_cache
+    ./configure
+    make
+fi
+
+mkdir -p $awk_build
+cp gawk $awk_build/
+
+PATH=$awk_build:$PATH
+
+
