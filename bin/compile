@@ -6,7 +6,7 @@ awk_cache=$cache_dir/gawk-4.1.3
 awk_build=$build_dir/vendor/awk
 awk_url="http://ftp.gnu.org/gnu/gawk/gawk-4.1.3.tar.gz"
 
-if [ - $awk_cache/gawk ]; then
+if [ -f $awk_cache/gawk ]; then
     echo "Using cached gawk"
 else
     mkdir -p $awk_cache
@@ -19,8 +19,13 @@ else
 fi
 
 mkdir -p $awk_build
-cp gawk $build_dir 
+cp $awk_cache/gawk $build_dir 
 
 PATH=$awk_build:$build_dir:$PATH
 
 gawk -V
+
+echo "#!/usr/bin/env bash\n" > $build_dir/launcher.sh
+echo "echo 'Staring launcher'\n" >> $build_dir/launcher.sh 
+echo "gawk -v PORT=\"\$PORT\" HOST=\"\$VCAP_APP_HOST\" -f app.awk" >> $build_dir/launcher.sh
+chmod +x $build_dir/launcher.sh 
